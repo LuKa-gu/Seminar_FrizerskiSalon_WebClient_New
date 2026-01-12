@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Registracija</title>
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body>
+
+<h2>Registracija frizerja</h2>
+
+<form id="signupForm">
+
+    <label for="Spol">Spol:</label>
+    <select id="Spol" required>
+        <option value="">-- izberi --</option>
+        <option value="Moški">Moški</option>
+        <option value="Ženski">Ženski</option>
+    </select><br><br>
+
+    <input type="text" id="Ime" placeholder="Ime" required><br>
+    <input type="text" id="Priimek" placeholder="Priimek" required><br>
+    <input type="text" id="Naslov" placeholder="Naslov" required><br>
+    <input type="number" id="Starost" placeholder="Starost" required><br>
+    <input type="email" id="Mail" placeholder="Email" required><br>
+    <input type="text" id="Telefon" placeholder="Telefon" required><br>
+
+    <textarea id="Opis" placeholder="Opis" required></textarea><br>
+
+    <input type="text" id="Uporabnisko_ime" placeholder="Uporabniško ime" required><br>
+    <input type="password" id="Geslo" placeholder="Geslo (min. 8 znakov)" required><br>
+    <div id="GesloError" class="error"></div>
+
+    <label for="Specializacije">Specializacije (ločene z vejico):</label><br>
+    <input type="text" id="Specializacije" placeholder="npr. Barvanje, Striženje"><br><br>
+
+    <button type="submit">Registracija</button>
+
+</form>
+
+<script type="module" src="/javascripts/signup.js"></script>
+</body>
+</html>

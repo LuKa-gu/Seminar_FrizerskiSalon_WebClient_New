@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Preverjanje prijave</title>
+</head>
+<body>
+    <p>Preverjam prijavo...</p><br>
+
+    <script type="module">
+        import { preveriJWT } from "/javascripts/auth.js";
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function init() {
+            // Najprej se stran nariše
+            await new Promise(requestAnimationFrame);
+
+            const data = await preveriJWT(); // vračamo celoten objekt { message, user }
+
+            // Počakamo 1s, da prikažemo "Preverjanje prijave"
+            await sleep(1000);
+
+            if (data) {
+                // Prikažemo sporočilo iz backend-a
+                const msgEl = document.createElement("p");
+                msgEl.textContent = data.message || "Prijava uspešna.";
+                document.body.append(msgEl);
+
+                // Po kratkem času preusmerimo na dashboard
+                setTimeout(() => {
+                    window.location.href = "/dashboard";
+                }, 2000);
+            } else {
+                window.location.href = "/login";
+            }
+        }
+
+        init();
+    </script>
+</body>
 </html>
+

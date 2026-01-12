@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Administratorski vmesnik</title>
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body>
+
+    <h1>Administratorski vmesnik</h1>
+
+    <h2 id="pozdrav">Pozdravljen!</h2>
+
+    <script type="module">
+        import { preveriJWT } from "/javascripts/auth.js";
+
+        async function initDashboard() {
+            const data = await preveriJWT();
+
+            // Prikažemo ime uporabnika
+            if (data.user && data.user.Uporabnisko_ime) {
+                const pozdravEl = document.getElementById("pozdrav");
+                pozdravEl.textContent = `Pozdravljen, ${data.user.Uporabnisko_ime}!`;
+            }
+
+        }
+        initDashboard();
+    </script>
+
+    <!-- Glavni trije bloki -->
+    <div id="dashboard-links" style="display: flex; justify-content: space-between; margin-top: 2rem;">
+        <!-- Levo: Pregled terminov -->
+        <div class="dashboard-block">
+            <h3>Pregled terminov</h3>
+            <button onclick="window.location.href='/termini'">Preglej</button>
+        </div>
+
+        <!-- Sredina: Rezervacija delovnika -->
+        <div class="dashboard-block">
+            <h3>Rezervacija delovnika</h3>
+            <button onclick="window.location.href='/delovniki'">Rezerviraj</button>
+        </div>
+
+        <!-- Desno: Upravljanje storitev -->
+        <div class="dashboard-block">
+            <h3>Upravljanje storitev</h3>
+            <button onclick="window.location.href='/storitve'">Upravljaj</button>
+        </div>
+    </div>
+</body>
+</html>
