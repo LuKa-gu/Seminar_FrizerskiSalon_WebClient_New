@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registracija</title>
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
@@ -18,21 +18,30 @@
         <option value="Ženski">Ženski</option>
     </select><br><br>
 
-    <input type="text" id="Ime" placeholder="Ime" required><br>
-    <input type="text" id="Priimek" placeholder="Priimek" required><br>
-    <input type="text" id="Naslov" placeholder="Naslov" required><br>
-    <input type="number" id="Starost" placeholder="Starost" required><br>
-    <input type="email" id="Mail" placeholder="Email" required><br>
-    <input type="text" id="Telefon" placeholder="Telefon" required><br>
+    <label for="Ime">Ime:</label><br>
+    <input type="text" id="Ime" placeholder="Vnesi ime" required><br>
+    <label for="Priimek">Priimek:</label><br>
+    <input type="text" id="Priimek" placeholder="Vnesi priimek" required><br>
+    <label for="Naslov">Naslov:</label><br>
+    <input type="text" id="Naslov" placeholder="Vnesi naslov" required><br>
+    <label for="Starost">Starost:</label><br>
+    <input type="number" id="Starost" placeholder="Vnesi starost" required><br>
+    <label for="Mail">Email:</label><br>
+    <input type="email" id="Mail" placeholder="Vnesi email" required><br>
+    <label for="Telefon">Telefon:</label><br>
+    <input type="text" id="Telefon" placeholder="Vnesi telefon" required><br>
 
-    <textarea id="Opis" placeholder="Opis" required></textarea><br>
-
-    <input type="text" id="Uporabnisko_ime" placeholder="Uporabniško ime" required><br>
-    <input type="password" id="Geslo" placeholder="Geslo (min. 8 znakov)" required><br>
+    <label for="Opis">Opis:</label><br>
+    <textarea id="Opis" placeholder="Vnesi opis" required></textarea><br><br>
+    
+    <label for="Uporabnisko_ime">Uporabniško ime:</label><br>
+    <input type="text" id="Uporabnisko_ime" placeholder="Vnesi uporabniško ime" required><br>
+    <label for="Geslo">Geslo:</label><br>
+    <input type="password" id="Geslo" placeholder="Vnesi geslo (min 8 znakov)" required><br><br>
     <div id="GesloError" class="error"></div>
 
-    <label for="Specializacije">Specializacije (ločene z vejico):</label><br>
-    <input type="text" id="Specializacije" placeholder="npr. Barvanje, Striženje"><br><br>
+    <label for="Specializacije">Specializacije:</label><br>
+    <textarea id="Specializacije" placeholder="Vnesi specializacije (ločene z vejico)" required></textarea><br><br>
 
     <button type="submit">Registracija</button>
 

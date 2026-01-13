@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Upravljanje storitev</title>
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
 <body>
+	<%- include('partials/meni') %>
 
-<h1>Upravljanje storitev</h1>
+    <h1>Upravljanje storitev</h1>
 
-<ul id="storitveSeznam"></ul>
+    <ul id="storitveSeznam"></ul><br>
+
+    <hr><br>
+
+    <h2>Dodaj novo storitev</h2>
+
+    <form id="storitveForm">
+        <div>
+            <label for="ime">Ime:</label><br>
+            <input type="text" id="ime" placeholder="Vnesi ime" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="opis">Opis:</label><br>
+            <textarea id="opis" placeholder="Vnesi opis" required></textarea>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="trajanje">Trajanje:</label><br>
+            <input type="number" id="trajanje" placeholder="Vnesi trajanje [min]" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="cena">Cena:</label><br>
+            <input type="number" id="cena" placeholder="Vnesi ceno [€]" required>
+        </div>
+
+        <br>
+
+        <button type="submit">Dodaj</button>
+    </form><br>
 
 <script type="module" src="/javascripts/storitve.js"></script>
 </body>

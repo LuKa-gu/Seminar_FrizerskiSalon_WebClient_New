@@ -19,7 +19,7 @@ const renderView = (req, res) => {
     res.render(viewName);
 };
 
-// Z zanko ustvarimo vse poti (generične)
+// Z zanko ustvarimo vse poti
 routes.forEach(route => {
     router.get(route, renderView);
 });

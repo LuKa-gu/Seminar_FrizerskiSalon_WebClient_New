@@ -4,11 +4,15 @@ import { preveriJWT } from "./auth.js";
 await preveriJWT();
 
 const seznamEl = document.getElementById("storitveSeznam");
+const form = document.getElementById("storitveForm");
 
 async function naloziStoritve() {
+    seznamEl.innerHTML = "";
+
     try {
-        seznamEl.innerHTML = "";
         const storitve = await apiFetch("/storitve");
+
+        const fragment = document.createDocumentFragment();
 
         storitve.forEach(s => {
             const li = document.createElement("li");
@@ -29,8 +33,10 @@ async function naloziStoritve() {
                 </div>
             `;
 
-            seznamEl.appendChild(li);
+            fragment.appendChild(li);
         });
+
+    seznamEl.appendChild(fragment);
 
     } catch (err) {
         alert(err.message);
@@ -187,5 +193,41 @@ seznamEl.addEventListener("click", async (e) => {
         } catch (err) {
             alert(err.message);
         }
+    }
+});
+
+// Dodajanje storitve
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const ime = document.getElementById("ime").value;
+    const opis = document.getElementById("opis").value;
+    const trajanje = document.getElementById("trajanje").value;
+    const cena = document.getElementById("cena").value;
+
+    // Osnovna frontend validacija
+    if (trajanje < 0 || cena < 0) {
+    alert("Trajanje in cena ne smeta biti negativni.");
+    return;
+    }
+
+    const data = {
+        Ime: ime,
+        Opis: opis,
+        Trajanje: trajanje,
+        Cena: cena
+    };
+
+    try {
+        const result = await apiFetch("/storitve", {
+            method: "POST",
+            body: JSON.stringify(data)
+        });
+
+        alert(result.message || "Storitev uspešno dodana.");
+        form.reset();
+
+    } catch (err) {
+        alert(err.message);
     }
 });

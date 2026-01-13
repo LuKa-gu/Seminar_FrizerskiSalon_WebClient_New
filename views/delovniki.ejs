@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Rezervacija delovnika</title>
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
 <body>
+    <%- include('partials/meni') %>
 
     <h1>Rezervacija delovnika</h1>
 
     <form id="delovnikiForm">
         <div>
-            <label for="dan">Dan</label><br>
+            <label for="dan">Dan:</label><br>
             <input type="date" id="dan" required>
         </div>
 
         <br>
 
         <div>
-            <label for="zacetek">Začetek</label><br>
+            <label for="zacetek">Začetek:</label><br>
             <input type="time" id="zacetek" required>
         </div>
 
         <br>
 
         <div>
-            <label for="konec">Konec</label><br>
+            <label for="konec">Konec:</label><br>
             <input type="time" id="konec" required>
         </div>
 
