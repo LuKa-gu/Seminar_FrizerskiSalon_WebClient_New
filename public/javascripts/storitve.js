@@ -94,9 +94,15 @@ seznamEl.addEventListener("click", async (e) => {
                 li._storitev = podrobnosti;
 
                 contentEl.innerHTML = `
-                    <p>Opis: ${podrobnosti.Opis}</p>
-                    <p>Trajanje: ${podrobnosti.Trajanje} min</p>
-                    <p>Cena: ${podrobnosti.Cena} €</p>
+                    <p>
+                        <strong>Opis:</strong> ${podrobnosti.Opis}
+                    </p>
+                    <p>
+                        <strong>Trajanje:</strong> ${podrobnosti.Trajanje} min
+                    </p>
+                    <p>
+                        <strong>Cena:</strong> ${podrobnosti.Cena} €
+                    </p>
                 `;
 
                 contentEl.dataset.loaded = "true";
@@ -125,9 +131,15 @@ seznamEl.addEventListener("click", async (e) => {
         const s = li._storitev;
 
         contentEl.innerHTML = `
-            <p>Opis: ${s.Opis}</p>
-            <p>Trajanje: ${s.Trajanje} min</p>
-            <p>Cena: ${s.Cena} €</p>
+            <p>
+                <strong>Opis:</strong> ${s.Opis}
+            </p>
+            <p>
+                <strong>Trajanje:</strong> ${s.Trajanje} min
+            </p>
+            <p>
+                <strong>Cena:</strong> ${s.Cena} €
+            </p>
         `;
 
         if (actionsEl) actionsEl.style.display = "block";
@@ -163,9 +175,15 @@ seznamEl.addEventListener("click", async (e) => {
 
             // nazaj v display mode
             contentEl.innerHTML = `
-                <p>Opis: ${opis}</p>
-                <p>Trajanje: ${trajanje} min</p>
-                <p>Cena: ${cena} €</p>
+                <p>
+                    <strong>Opis:</strong> ${podrobnosti.Opis}
+                </p>
+                <p>
+                    <strong>Trajanje:</strong> ${podrobnosti.Trajanje} min
+                </p>
+                <p>
+                    <strong>Cena:</strong> ${podrobnosti.Cena} €
+                </p>
             `;
 
             if (actionsEl) actionsEl.style.display = "block";

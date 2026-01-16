@@ -9,7 +9,9 @@
 
     <h1>Frizerski salon - administratorski vmesnik</h1>
 
-    <h2 id="pozdrav">Pozdravljen!</h2>
+    <hr><br>
+
+    <h2 class="no-icon" id="pozdrav">Pozdravljen!</h2>
 
     <script type="module">
         import { preveriJWT } from "/javascripts/auth.js";
@@ -31,19 +33,19 @@
     <div id="dashboard-links" style="display: flex; justify-content: space-between; margin-top: 2rem;">
         <!-- Levo: Pregled terminov -->
         <div class="dashboard-block">
-            <h3>Pregled terminov</h3>
+            <h2>Pregled terminov</h2>
             <button onclick="window.location.href='/termini'">Preglej</button>
         </div>
 
         <!-- Sredina: Rezervacija delovnika -->
         <div class="dashboard-block">
-            <h3>Rezervacija delovnika</h3>
+            <h2>Rezervacija delovnikov</h2>
             <button onclick="window.location.href='/delovniki'">Rezerviraj</button>
         </div>
 
         <!-- Desno: Upravljanje storitev -->
         <div class="dashboard-block">
-            <h3>Upravljanje storitev</h3>
+            <h2>Upravljanje storitev</h2>
             <button onclick="window.location.href='/storitve'">Upravljaj</button>
         </div>
     </div>

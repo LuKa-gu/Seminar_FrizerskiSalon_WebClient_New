@@ -65,7 +65,7 @@ async function naloziDelovnike() {
 
             li.innerHTML = `
                 <span class="display">
-                    <strong>${d.dan}</strong>:
+                    <strong>${d.dan}:</strong>
                     ${d.Zacetek} - ${d.Konec}
                 </span>
                 <button class="posodobiBtn">Posodobi</button>

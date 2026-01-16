@@ -1,8 +1,57 @@
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.clearFloat {
+  float:clear;
+}
+
+#pozdrav {
+  font-weight: normal;
+  opacity: 0.7;
+}
+
+.znak {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.znak img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+}
+
+h1, h2, h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h1::before,
+h2::before,
+h3::before {
+  content: "";
+  width: 2em;
+  height: 2em;
+
+  background-image: url("/images/skarje_glavnik_x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+h1.no-icon::before,
+h2.no-icon::before,
+h3.no-icon::before {
+  content: none;
 }

@@ -3,7 +3,7 @@ import { apiFetch } from "./api.js";
 export async function preveriJWT() {
     try {
         const data = await apiFetch("/frizerji/jaz"); // vrne {message, user}
-        return data;   // vrnemo celoten objekt
+        return data; // vrnemo celoten objekt
     } catch (err) {
         localStorage.removeItem("token");
         window.location.href = "/login";
