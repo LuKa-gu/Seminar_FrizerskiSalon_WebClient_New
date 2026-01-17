@@ -6,7 +6,6 @@ await preveriJWT();
 
 const form = document.getElementById("delovnikiForm");
 const seznamEl = document.getElementById("delovnikiSeznam");
-const preglejBtn = document.getElementById("preglejDelovnikeBtn");
 
 // Dodajanje delovnika
 form.addEventListener("submit", async (e) => {
@@ -42,9 +41,6 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-// Pregled delovnikov
-preglejBtn.addEventListener("click", naloziDelovnike);
-
 async function naloziDelovnike() {
     seznamEl.innerHTML = "";
 
@@ -52,7 +48,11 @@ async function naloziDelovnike() {
         const result = await apiFetch("/delovniki");
 
         if (!Array.isArray(result)) {
-            seznamEl.innerHTML = `<li>${result.message}</li>`;
+            seznamEl.innerHTML = `
+                <li class="list-group-item text-center text-muted">
+                    ${result.message}
+                </li>
+            `;
             return;
         }
         
@@ -60,16 +60,22 @@ async function naloziDelovnike() {
 
         result.forEach(d => {
             const li = document.createElement("li");
-
+            li.classList.add("delovnik-item");
             li.dataset.url = d.Url;
+            li._delovnik = d;
 
             li.innerHTML = `
-                <span class="display">
-                    <strong>${d.dan}:</strong>
-                    ${d.Zacetek} - ${d.Konec}
-                </span>
-                <button class="posodobiBtn">Posodobi</button>
-                <button class="izbrisiBtn">Izbriši</button>
+                <div class="delovnik-display">
+                    <div class="delovnik-info">
+                        <strong>${d.dan}:</strong><br>
+                        <span>${d.Zacetek} - ${d.Konec}</span>
+                    </div>
+
+                    <div class="delovnik-actions">
+                        <button class="btn btn-primary posodobiBtn">Posodobi</button>
+                        <button class="btn btn-danger izbrisiBtn">Izbriši</button>
+                    </div>
+                </div>
             `;
 
             fragment.appendChild(li);
@@ -83,23 +89,33 @@ async function naloziDelovnike() {
 }
 
 function preklopiVEdit(li) {
-    const id = li.dataset.id;
-
-    const displaySpan = li.querySelector(".display");
-    const text = displaySpan.textContent;
-
-    // izluščimo vrednosti (ker jih že imamo v HTML-ju)
-    const dan = text.match(/\d{4}-\d{2}-\d{2}/)[0];
-    const [zacetek, konec] = text.match(/\d{2}:\d{2}/g);
+    const d = li._delovnik;
 
     li.innerHTML = `
-        <input type="date" value="${dan}" class="editDan">
-        <input type="time" value="${zacetek}" class="editZacetek">
-        <input type="time" value="${konec}" class="editKonec">
-        <button class="shraniBtn">Shrani</button>
-        <button class="prekliciBtn">Prekliči</button>
+        <div class="delovnik-edit">
+            <div class="form-group">
+                <label>Dan</label>
+                <input type="date" value="${d.dan}" class="form-control editDan">
+            </div>
+            <div class="form-group">
+                <label>Začetek</label>
+                <input type="time" value="${d.Zacetek}" class="form-control editZacetek">
+            </div>
+            <div class="form-group">
+                <label>Konec</label>
+                <input type="time" value="${d.Konec}" class="form-control editKonec">
+            </div>
+
+            <div class="delovnik-actions">
+                <button class="btn btn-primary shraniBtn">Shrani</button>
+                <button class="btn btn-secondary prekliciBtn">Prekliči</button>
+            </div>
+        </div>
     `;
 }
+
+// Naloži delovnike ob odprtju strani
+naloziDelovnike();
 
 seznamEl.addEventListener("click", async (e) => {
     // Update delovnika

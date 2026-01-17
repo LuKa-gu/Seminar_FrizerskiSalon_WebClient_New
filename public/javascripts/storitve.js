@@ -18,18 +18,24 @@ async function naloziStoritve() {
             const li = document.createElement("li");
             li.dataset.url = s.url;
 
+            li.className = "list-group-item";
+
             li.innerHTML = `
-                <span class="naziv"><strong>${s.naziv}</strong></span>
-                <button class="toggleBtn">+</button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="naziv">
+                        <strong>${s.naziv}</strong>
+                    </span>
+
+                    <button class="btn btn-primary btn-sm toggleBtn">+</button>
+                </div>
 
                 <div class="details" style="display:none;">
-                    <div class="content"></div>
+                    <div class="content mt-3"></div>
 
-                    <div class="actions">
-                        <button class="editBtn">Posodobi</button>
-                        <button class="deleteBtn">Izbriši</button>
-
-                    </div><br>
+                    <div class="actions mt-2">
+                        <button class="btn btn-primary editBtn">Posodobi</button>
+                        <button class="btn btn-danger deleteBtn">Izbriši</button>
+                    </div>
                 </div>
             `;
 
@@ -51,18 +57,18 @@ function preklopiVEdit(li) {
     // skrijemo originalne gumbe
     if (actionsEl) actionsEl.style.display = "none";
 
-    contentEl.innerHTML = `<br>
+    contentEl.innerHTML = `
         <label>Opis:</label><br>
-        <textarea class="editOpis">${storitev.Opis}</textarea><br><br>
+        <textarea class="form-control editOpis">${storitev.Opis}</textarea>
 
-        <label>Trajanje (min):</label><br>
-        <input type="number" class="editTrajanje" value="${storitev.Trajanje}"><br><br>
+        <label>Trajanje [min]:</label>
+        <input type="number" class="form-control editTrajanje" value="${storitev.Trajanje}">
 
-        <label>Cena (€):</label><br>
-        <input type="number" class="editCena" value="${storitev.Cena}"><br><br>
+        <label>Cena [€]:</label>
+        <input type="number" class="form-control editCena" value="${storitev.Cena}">
 
-        <button class="shraniBtn">Shrani</button>
-        <button class="prekliciBtn">Prekliči</button>
+        <button class="btn btn-primary shraniBtn">Shrani</button>
+        <button class="btn btn-secondary prekliciBtn">Prekliči</button>
     `;
 }
 
@@ -95,13 +101,13 @@ seznamEl.addEventListener("click", async (e) => {
 
                 contentEl.innerHTML = `
                     <p>
-                        <strong>Opis:</strong> ${podrobnosti.Opis}
+                        Opis: ${podrobnosti.Opis}
                     </p>
                     <p>
-                        <strong>Trajanje:</strong> ${podrobnosti.Trajanje} min
+                        Trajanje: ${podrobnosti.Trajanje} min
                     </p>
                     <p>
-                        <strong>Cena:</strong> ${podrobnosti.Cena} €
+                        Cena: ${podrobnosti.Cena} €
                     </p>
                 `;
 
@@ -132,13 +138,13 @@ seznamEl.addEventListener("click", async (e) => {
 
         contentEl.innerHTML = `
             <p>
-                <strong>Opis:</strong> ${s.Opis}
+                Opis: ${s.Opis}
             </p>
             <p>
-                <strong>Trajanje:</strong> ${s.Trajanje} min
+                Trajanje: ${s.Trajanje} min
             </p>
             <p>
-                <strong>Cena:</strong> ${s.Cena} €
+                Cena: ${s.Cena} €
             </p>
         `;
 
@@ -176,13 +182,13 @@ seznamEl.addEventListener("click", async (e) => {
             // nazaj v display mode
             contentEl.innerHTML = `
                 <p>
-                    <strong>Opis:</strong> ${podrobnosti.Opis}
+                    Opis: ${opis}
                 </p>
                 <p>
-                    <strong>Trajanje:</strong> ${podrobnosti.Trajanje} min
+                    Trajanje: ${trajanje} min
                 </p>
                 <p>
-                    <strong>Cena:</strong> ${podrobnosti.Cena} €
+                    Cena: ${cena} €
                 </p>
             `;
 
@@ -225,7 +231,7 @@ form.addEventListener("submit", async (e) => {
 
     // Osnovna frontend validacija
     if (trajanje < 0 || cena < 0) {
-    alert("Trajanje in cena ne smeta biti negativni.");
+        alert("Trajanje in cena ne smeta biti negativni.");
     return;
     }
 

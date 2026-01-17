@@ -1,14 +1,14 @@
 body {
-  padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px;
 }
 
-a {
-  color: #00B7FF;
-}
-
-.clearFloat {
-  float:clear;
+/* Vertikalno centriranje */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
 }
 
 #pozdrav {
@@ -19,7 +19,7 @@ a {
 .znak {
   display: flex;
   justify-content: center;
-  margin: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .znak img {
@@ -38,8 +38,8 @@ h1::before,
 h2::before,
 h3::before {
   content: "";
-  width: 2em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
 
   background-image: url("/images/skarje_glavnik_x.png");
   background-size: contain;
@@ -54,4 +54,283 @@ h1.no-icon::before,
 h2.no-icon::before,
 h3.no-icon::before {
   content: none;
+}
+
+/* Navbar brand z ikono */
+.navbar-brand.brand-icon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: x-large;
+  color: white;
+}
+
+.navbar-brand.brand-icon::before {
+  content: "";
+  width: 2em;
+  height: 2em;
+
+  background-image: url("/images/skarje_glavnik_x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  transition: color 0.2s;
+  margin-left: 1rem;
+}
+
+/* Hover efekt za linke */
+.nav-link:hover, a:hover {
+  color: #6d4731;
+}
+
+#dashboard-links {
+  gap: 1rem;
+}
+
+.dashboard-block {
+  flex: 1 1 30%;
+  background-color: white;
+  border: 2px solid var(--primary); /* #fd7e14 */
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-block h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.dashboard-block button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .dashboard-block {
+    flex: 1 1 100%;
+  }
+}
+
+/* Seznam storitev kot “card-like” elementi */
+#storitveSeznam {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+#storitveSeznam .list-group-item,
+#terminiSeznam .list-group-item,
+#delovnikiSeznam .list-group-item {
+  background-color: white;
+  border: 1px solid var(--primary); /* #fd7e14 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Spodnji del za podrobnosti / edit mode */
+#storitveSeznam .details {
+  margin-top: 0.5rem;
+}
+
+/* Inputi in textarea znotraj edit mode */
+#storitveSeznam input,
+#storitveSeznam textarea {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+
+/* Gumbi znotraj edit mode */
+#storitveSeznam button {
+  margin-right: 0.5rem;
+}
+
+#storitveForm .btn {
+  width: 100%;
+}
+
+/* ===== Delovniki ===== */
+
+#delovnikiSeznam {
+  padding: 0;
+  margin-top: 1rem;
+}
+
+/* en delovnik = mini card */
+.delovnik-item {
+  list-style: none;
+  background-color: white;
+  border: 1px solid var(--primary); /* #fd7e14 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* display mode */
+.delovnik-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delovnik-info {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* gumbi */
+.delovnik-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* edit mode */
+.delovnik-edit .form-group {
+  margin-bottom: 0.75rem;
+}
+
+/* ===== TERMINI ===== */
+
+#terminiSeznam {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* en termin = bel box z oranžno obrobo */
+.termin-item {
+  background-color: white;
+  border: 1px solid var(--primary); /* #fd7e14 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* zgornja vrstica */
+.termin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.termin-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.termin-stranka {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* skriti detajli */
+.termin-item .details {
+  display: none;
+  margin-top: 1rem;
+}
+
+/* vsebina podrobnosti */
+.termin-item .content h4 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.termin-item .content ul {
+  padding-left: 1.2rem;
+}
+
+/* akcije */
+.termin-item .actions,
+.inlineActions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* status */
+.statusValue {
+  font-weight: bold;
+}
+
+/* select pri urejanju statusa */
+.editStatus {
+  margin-left: 0.5rem;
+}
+
+/* ===== TERMIN DETAILS ===== */
+
+.termin-section {
+  margin-bottom: 1rem;
+}
+
+.storitve-seznam,
+.kontakt-seznam {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.storitev-meta {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.opombe {
+  background-color: #f8f9fa;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 0.25rem;
+}
+
+/* ===== STATUS EDIT ===== */
+
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* select kot "izbor spola" */
+.editStatus.form-control {
+  width: auto;
+  min-width: 200px;
+  display: inline-block;
+}
+
+/* gumbi Shrani / Prekliči */
+.inlineActions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
 }

@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title>Administratorski vmesnik</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+    
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
-<body>
+<body class="bg-light">
 
-    <h1>Frizerski salon - administratorski vmesnik</h1>
+<div class="page-wrapper container d-flex flex-column align-items-center">
 
-    <hr><br>
+    <!-- Naslov -->
+    <h1 class="mb-3">Frizerski salon - administratorski vmesnik</h1>
+    <hr class="w-100 mb-4">
 
-    <h2 class="no-icon" id="pozdrav">Pozdravljen!</h2>
+    <!-- Pozdrav -->
+    <h2 class="no-icon mb-4" id="pozdrav">Pozdravljen!</h2>
 
     <script type="module">
         import { preveriJWT } from "/javascripts/auth.js";
@@ -19,35 +29,33 @@
         async function initDashboard() {
             const data = await preveriJWT();
 
-            // Prikažemo ime uporabnika
             if (data.user && data.user.Uporabnisko_ime) {
                 const pozdravEl = document.getElementById("pozdrav");
                 pozdravEl.textContent = `Pozdravljen, ${data.user.Uporabnisko_ime}!`;
             }
-
         }
+
         initDashboard();
     </script>
 
-    <!-- Glavni trije bloki -->
-    <div id="dashboard-links" style="display: flex; justify-content: space-between; margin-top: 2rem;">
-        <!-- Levo: Pregled terminov -->
+    <!-- Dashboard blok -->
+    <div id="dashboard-links" class="d-flex flex-wrap justify-content-between w-100">
+
         <div class="dashboard-block">
             <h2>Pregled terminov</h2>
-            <button onclick="window.location.href='/termini'">Preglej</button>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/termini'">Preglej</button>
         </div>
 
-        <!-- Sredina: Rezervacija delovnika -->
         <div class="dashboard-block">
             <h2>Rezervacija delovnikov</h2>
-            <button onclick="window.location.href='/delovniki'">Rezerviraj</button>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/delovniki'">Rezerviraj</button>
         </div>
 
-        <!-- Desno: Upravljanje storitev -->
         <div class="dashboard-block">
             <h2>Upravljanje storitev</h2>
-            <button onclick="window.location.href='/storitve'">Upravljaj</button>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/storitve'">Upravljaj</button>
         </div>
+
     </div>
-</body>
-</html>
+
+</div>

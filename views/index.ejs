@@ -1,45 +1,68 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title>Preverjanje prijave</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
-<body>
-    <p>Preverjam prijavo...</p><br>
+<body class="bg-light">
 
-    <script type="module">
-        import { preveriJWT } from "/javascripts/auth.js";
+<div class="page-wrapper container d-flex flex-column align-items-center">
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+    <!-- Logo -->
+    <div class="znak mb-4">
+        <img src="/images/frizerskisalon_znak.png" alt="Frizerski salon" class="img-fluid">
+    </div>
+
+    <!-- Status messages -->
+    <div class="text-center login-card">
+        <p id="checkingMessage" class="lead mb-2">Preverjam prijavo...</p>
+        <p id="statusMessage" class="lead mb-0"></p>
+    </div>
+
+</div>
+
+<script type="module">
+    import { preveriJWT } from "/javascripts/auth.js";
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function init() {
+        // Najprej se stran nariše
+        await new Promise(requestAnimationFrame);
+
+        const data = await preveriJWT(); // vračamo celoten objekt { message, user }
+
+        // Počakamo 1s, da prikažemo "Preverjanje prijave"
+        await sleep(1000);
+
+        const checkingEl = document.getElementById("checkingMessage");
+        const statusEl = document.getElementById("statusMessage");
+
+        if (data) {
+            // Prikažemo sporočilo iz backend-a
+            statusEl.textContent = data.message || "Prijava uspešna.";
+
+            // Po kratkem času preusmerimo na dashboard
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 2000);
+        } else {
+            window.location.href = "/login";
         }
+    }
 
-        async function init() {
-            // Najprej se stran nariše
-            await new Promise(requestAnimationFrame);
+    init();
+</script>
 
-            const data = await preveriJWT(); // vračamo celoten objekt { message, user }
-
-            // Počakamo 1s, da prikažemo "Preverjanje prijave"
-            await sleep(1000);
-
-            if (data) {
-                // Prikažemo sporočilo iz backend-a
-                const msgEl = document.createElement("p");
-                msgEl.textContent = data.message || "Prijava uspešna.";
-                document.body.append(msgEl);
-
-                // Po kratkem času preusmerimo na dashboard
-                setTimeout(() => {
-                    window.location.href = "/dashboard";
-                }, 2000);
-            } else {
-                window.location.href = "/login";
-            }
-        }
-
-        init();
-    </script>
 </body>
 </html>
-

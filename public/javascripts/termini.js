@@ -10,45 +10,58 @@ const seznam = document.getElementById('terminiSeznam');
 function prikaziTermine(contentEl, termin) {
     /* ===== STORITVE ===== */
     const storitveHtml = termin.storitve.length
-        ? `<ul>
-            ${termin.storitve.map(s => `
-                <li>
-                    ${s.naziv} (${s.trajanje} min ; ${s.cena} €)
-                </li>
-            `).join("")}
-            </ul>`
-        : `<p>Brez storitev</p>`;
+        ? `
+            <ul class="storitve-seznam">
+                ${termin.storitve.map(s => `
+                    <li>
+                        ${s.naziv} 
+                        <span class="storitev-meta">
+                            (${s.trajanje} min · ${s.cena} €)
+                        </span>
+                    </li>
+                `).join("")}
+            </ul>
+        `
+        : `<p class="text-muted">Brez storitev</p>`;
 
     /* ===== OPOMBE ===== */
     const opombeHtml = termin.opombe
-        ? `<p><strong>Opombe:</strong> ${termin.opombe}</p>`
-        : `<p><em>Brez opomb</em></p>`;
+        ? `<p class="opombe">Opombe: ${termin.opombe}</p>`
+        : `<p class="text-muted"><em>Brez opomb</em></p>`;
 
     contentEl.innerHTML = `
-        <h4>Storitve</h4>
-        ${storitveHtml}
+        <div class="termin-section">
+            <h4>Storitve</h4>
+            ${storitveHtml}
+        </div>
 
-        <p>
-            <strong>Skupno trajanje:</strong> ${termin.skupno_trajanje} min<br><br>
-            <strong>Skupna cena:</strong> ${termin.skupna_cena} €
-        </p>
+        <div class="termin-section">
+            <p>
+                Skupno trajanje: ${termin.skupno_trajanje} min<br>
+                Skupna cena: ${termin.skupna_cena} €
+            </p>
+        </div>
+        
+        <div class="termin-section">
+            ${opombeHtml}
+        </div>
 
-        ${opombeHtml}
+        <div class="termin-section">
+            <h4>Kontakt</h4>
+            <ul class="kontakt-seznam">
+                <li>
+                    Telefon: ${termin.kontakt.telefon}
+                </li>
+                <li>
+                    Mail: ${termin.kontakt.mail}
+                </li>
+            </ul>
+        </div>
 
-        <h4>Kontakt</h4>
-        <ul>
-            <li>
-                <strong>Telefon:</strong> ${termin.kontakt.telefon}<br>
-            </li>
-            <li>
-                <strong>Mail:</strong> ${termin.kontakt.mail}
-            </li>
-        </ul>
-
-        <p>
-            <strong>Status:</strong> 
+        <div class="termin-section status-section">
+            Status: 
             <span class="statusValue">${termin.status}</span>
-        </p>
+        </div>
     `;
 }
 
@@ -66,7 +79,7 @@ function preklopiVEdit(li) {
     const statusi = ["Rezervirano", "V izvajanju", "Zaključeno", "Preklicano"];
 
     const select = document.createElement("select");
-    select.classList.add("editStatus");
+    select.classList.add("editStatus", "form-control");
 
     statusi.forEach(s => {
         const opt = document.createElement("option");
@@ -86,8 +99,8 @@ function preklopiVEdit(li) {
 
     contentEl.insertAdjacentHTML("beforeend", ` 
         <div class="inlineActions">
-            <button class="shraniBtn">Shrani</button>
-            <button class="prekliciBtn">Prekliči</button>
+            <button class="btn btn-primary shraniBtn">Shrani</button>
+            <button class="btn btn-secondary prekliciBtn">Prekliči</button>
         </div>
     `);
 }
@@ -102,7 +115,11 @@ form.addEventListener('submit', async (e) => {
         const response = await apiFetch(`/frizerji/termini?dan=${dan}`);
 
         if (response.termini.length === 0) {
-            seznam.innerHTML = `<li>${response.message}</li>`;
+            seznam.innerHTML = `
+                <li class="list-group-item text-center text-muted">
+                    ${response.message}
+                </li>
+            `;
             return;
         }
 
@@ -110,20 +127,25 @@ form.addEventListener('submit', async (e) => {
 
         response.termini.forEach(termin => {
             const li = document.createElement('li');
-
+            li.classList.add('termin-item');
             li.dataset.url = termin.url;
 
             li.innerHTML = `
-                <strong>${termin.ura}</strong> | 
-                ${termin.stranka} 
-                <button class="toggleBtn">+</button>
+                <div class="termin-header">
+                    <div class="termin-main">
+                        <strong>${termin.ura}</strong>
+                        <span class="termin-stranka">${termin.stranka}</span>
+                    </div>
 
-                <div class="details" style="display:none;">
+                    <button class="btn btn-primary btn-sm toggleBtn">+</button>
+                </div>
+
+                <div class="details">
                     <div class="content"></div>
 
                     <div class="actions">
-                        <button class="editBtn">Spremeni status</button>
-                    </div><br>
+                        <button class="btn btn-primary editBtn">Spremeni status</button>
+                    </div>
                 </div>
             `;
 

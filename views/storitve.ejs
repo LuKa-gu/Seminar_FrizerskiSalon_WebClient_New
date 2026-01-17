@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
     <title>Upravljanje storitev</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
-<body>
-	<%- include('partials/meni') %>
+<body class="bg-light">
 
-    <h1>Upravljanje storitev</h1>
+<%- include('partials/meni') %>
 
-    <ul id="storitveSeznam"></ul><br>
+<div class="page-wrapper container d-flex flex-column align-items-center">
 
-    <hr><br>
+    <h1 class="mb-4">Upravljanje storitev</h1>
 
-    <h1>Dodaj novo storitev</h1>
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
 
-    <form id="storitveForm">
-        <div>
-            <label for="ime">Ime:</label><br>
-            <input type="text" id="ime" placeholder="Vnesi ime" required>
+            <!-- Seznam storitev -->
+            <ul id="storitveSeznam" class="list-group w-100"></ul>
         </div>
+    </div>
 
-        <br>
+    <hr class="w-100 mb-4">
 
-        <div>
-            <label for="opis">Opis:</label><br>
-            <textarea id="opis" placeholder="Vnesi opis" required></textarea>
+    <h1 class="mb-4">Dodaj novo storitev</h1>
+
+    <!-- Dodaj storitev form -->
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+
+            <form id="storitveForm">
+
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" id="ime" class="form-control" placeholder="Vnesi ime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="opis">Opis</label>
+                    <textarea id="opis" class="form-control" placeholder="Vnesi opis" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="trajanje">Trajanje</label>
+                    <input type="number" id="trajanje" class="form-control" placeholder="Vnesi trajanje [min]" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cena">Cena</label>
+                    <input type="number" id="cena" class="form-control" placeholder="Vnesi ceno [€]" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Dodaj</button>
+
+            </form>
+
         </div>
+    </div>
 
-        <br>
-
-        <div>
-            <label for="trajanje">Trajanje:</label><br>
-            <input type="number" id="trajanje" placeholder="Vnesi trajanje [min]" required>
-        </div>
-
-        <br>
-
-        <div>
-            <label for="cena">Cena:</label><br>
-            <input type="number" id="cena" placeholder="Vnesi ceno [€]" required>
-        </div>
-
-        <br>
-
-        <button type="submit">Dodaj</button>
-    </form><br>
+</div>
 
 <script type="module" src="/javascripts/storitve.js"></script>
 </body>

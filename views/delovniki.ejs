@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Rezervacija delovnika</title>
+	<meta charset="UTF-8">
+    <title>Upravljanje storitev</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
     <link rel="stylesheet" href="/stylesheets/stil.css">
 </head>
-<body>
-    <%- include('partials/meni') %>
+<body class="bg-light">
 
-    <h1>Rezervacija delovnika</h1>
+<%- include('partials/meni') %>
 
-    <form id="delovnikiForm">
-        <div>
-            <label for="dan">Dan:</label><br>
-            <input type="date" id="dan" required>
+<div class="page-wrapper container d-flex flex-column align-items-center">
+
+    <h1 class="mb-4">Rezervacija delovnika</h1>
+
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+
+            <form id="delovnikiForm">
+
+                <div class="form-group">
+                    <label for="dan">Dan</label>
+                    <input type="date" id="dan" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="zacetek">Začetek</label>
+                    <input type="time" id="zacetek" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="konec">Konec</label>
+                    <input type="time" id="konec" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Rezerviraj</button>
+            </form>
         </div>
+    </div>
 
-        <br>
+    <hr class="w-100 mb-4">
 
-        <div>
-            <label for="zacetek">Začetek:</label><br>
-            <input type="time" id="zacetek" required>
+    <h1 class="mb-4">Pregled delovnikov</h1>
+
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+
+            <!-- Seznam delovnikov -->
+            <ul id="delovnikiSeznam" class="list-group w-100"></ul>
         </div>
+    </div>
+</div>
 
-        <br>
-
-        <div>
-            <label for="konec">Konec:</label><br>
-            <input type="time" id="konec" required>
-        </div>
-
-        <br>
-
-        <button type="submit">Rezerviraj</button>
-    </form><br><br>
-
-    <hr><br>
-
-    <h1>Pregled delovnikov</h1><br>
-
-    <button id="preglejDelovnikeBtn">Preglej</button>
-
-    <ul id="delovnikiSeznam"></ul>
-
-    <script type="module" src="/javascripts/delovniki.js"></script>
+<script type="module" src="/javascripts/delovniki.js"></script>
 </body>
 </html>
