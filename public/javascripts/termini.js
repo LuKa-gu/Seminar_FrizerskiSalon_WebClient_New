@@ -1,5 +1,6 @@
 import { apiFetch } from "./api.js";
 import { preveriJWT } from "./auth.js";
+import { showAlert } from "./alerts.js";
 
 // Preveri JWT ob nalaganju strani
 await preveriJWT();
@@ -96,7 +97,6 @@ function preklopiVEdit(li) {
     statusSpan.replaceWith(select);
 
     // dodamo gumbe
-
     contentEl.insertAdjacentHTML("beforeend", ` 
         <div class="inlineActions">
             <button class="btn btn-primary shraniBtn">Shrani</button>
@@ -155,7 +155,7 @@ form.addEventListener('submit', async (e) => {
         seznam.appendChild(fragment);
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 });
 
@@ -188,7 +188,7 @@ seznam.addEventListener("click", async (e) => {
 
                 contentEl.dataset.loaded = "true";
             } catch (err) {
-                alert(err.message);
+                showAlert(err.message, "danger");
                 return;
             }
         }
@@ -200,7 +200,7 @@ seznam.addEventListener("click", async (e) => {
     /* ===== POSODOBI ===== */
     if (e.target.classList.contains("editBtn")) {
         if (!li._termin) {
-            alert("Najprej odprite podrobnosti termina.");
+            showAlert("Najprej odprite podrobnosti termina.", "warning");
             return;
         }
 
@@ -236,7 +236,7 @@ seznam.addEventListener("click", async (e) => {
                 })
             });
 
-            alert(res.message);
+            showAlert(res.message || "Status termina uspešno posodobljen.", "success");
 
             // osveži lokalne podatke
             li._termin.status = newStatus;
@@ -252,7 +252,7 @@ seznam.addEventListener("click", async (e) => {
 
             if (actionsEl) actionsEl.style.display = "block";
         } catch (err) {
-            alert(err.message);
+            showAlert(err.message, "danger");
         }
     }
 });

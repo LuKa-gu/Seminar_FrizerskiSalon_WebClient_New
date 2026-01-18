@@ -1,5 +1,6 @@
 import { apiFetch } from "./api.js";
 import { preveriJWT } from "./auth.js";
+import { showAlert } from "./alerts.js";
 
 // Preveri JWT ob nalaganju strani
 await preveriJWT();
@@ -17,7 +18,7 @@ form.addEventListener("submit", async (e) => {
 
     // Osnovna frontend validacija
     if (zacetek >= konec) {
-        alert("Začetek mora biti pred koncem.");
+        showAlert("Začetek mora biti pred koncem.", "warning");
         return;
     }
 
@@ -33,11 +34,11 @@ form.addEventListener("submit", async (e) => {
             body: JSON.stringify(data)
         });
 
-        alert(result.message || "Delovnik uspešno dodan.");
+        showAlert(result.message || "Delovnik uspešno dodan.", "success");
         form.reset();
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 });
 
@@ -84,7 +85,7 @@ async function naloziDelovnike() {
         seznamEl.appendChild(fragment);
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 }
 
@@ -139,7 +140,7 @@ seznamEl.addEventListener("click", async (e) => {
         const konec = li.querySelector(".editKonec").value;
 
         if (zacetek >= konec) {
-            alert("Začetek mora biti pred koncem.");
+            showAlert("Začetek mora biti pred koncem.", "warning");
             return;
         }
 
@@ -149,11 +150,11 @@ seznamEl.addEventListener("click", async (e) => {
                 body: JSON.stringify({ dan, zacetek, konec })
             });
 
-            alert(result.message);
+            showAlert(result.message || "Delovnik uspešno posodobljen.", "success");
             naloziDelovnike();
 
         } catch (err) {
-            alert(err.message);
+            showAlert(err.message, "danger");
         }
     }    
 
@@ -167,11 +168,11 @@ seznamEl.addEventListener("click", async (e) => {
                 method: "DELETE"
             });
 
-            alert(result.message || "Delovnik izbrisan.");
+            showAlert(result.message || "Delovnik uspešno izbrisan.", "success");
             naloziDelovnike();
 
         } catch (err) {
-            alert(err.message);
+            showAlert(err.message, "danger");
         }
     }
 });

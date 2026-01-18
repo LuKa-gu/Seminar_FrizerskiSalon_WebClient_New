@@ -1,3 +1,35 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!-- Bootswatch United theme -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+>
+<link rel="stylesheet" href="/stylesheets/stil.css">
+
+<div class="container mt-4">
+
+    <div class="alert alert-danger alert-dismissible fade show fixed-top m-3 text-center alertBar" role="alert">
+        <strong>Napaka!</strong> <%= message %>
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+                &times;
+        </button>
+    </div>
+
+    <% if (error && error.status) { %>
+        <small class="text-muted">
+            Koda napake: <%= error.status %>
+        </small>
+    <% } %>
+
+    <% if (error && error.stack && env === 'development') { %>
+        <pre class="mt-3 text-muted"><%= error.stack %></pre>
+    <% } %>
+
+</div>
+
+<!-- Alerti -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

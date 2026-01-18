@@ -19,8 +19,17 @@ export async function apiFetch(endpoint, options = {}) {
     });
 
     if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || "Napaka");
+        let errorMessage = "Napaka pri komunikaciji s strežnikom.";
+
+        try {
+            const err = await response.json();
+            errorMessage = err.error || err.message || errorMessage;
+        } catch (e) {
+            // response ni JSON (npr. 500 Internal Server Error)
+        }
+        const error = new Error(errorMessage);
+        error.status = response.status;
+        throw error;
     }
 
     return response.json();

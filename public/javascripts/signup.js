@@ -1,4 +1,5 @@
 import { apiFetch } from "./api.js";
+import { showAlert } from "./alerts.js";
 
 function showError(id, message) {
     document.getElementById(id + 'Error').innerText = message;
@@ -32,14 +33,14 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     // Preveri prazna polja
     for (const key of Object.keys(data)) {
         if (key !== 'Specializacije' && !data[key]) {
-            alert('Izpolni vsa obvezna polja.');
+            showAlert('Izpolni vsa obvezna polja.', "warning");
             return
         }
     }
 
     // Preveri specializacije
     if (data.Specializacije.length === 0) {
-        alert('Vnesi vsaj eno specializacijo.');
+        showAlert('Vnesi vsaj eno specializacijo.', "warning");
         return;
     }
 
@@ -59,11 +60,13 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
         // uspešna registracija
         const successMsg = res.message || 'Registracija uspešna.';
-        alert(`${successMsg}\nSedaj se lahko prijavite.`);
+        showAlert(`${successMsg} Sedaj se lahko prijavite.`, "success");
 
-        window.location.href = '/login';
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 2000);
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 });

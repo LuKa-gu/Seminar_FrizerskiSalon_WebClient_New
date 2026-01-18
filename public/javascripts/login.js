@@ -1,4 +1,5 @@
 import { login } from "./auth.js";
+import { showAlert } from "./alerts.js";
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -10,6 +11,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         await login(username, password);
         window.location.href = "/dashboard";
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 });

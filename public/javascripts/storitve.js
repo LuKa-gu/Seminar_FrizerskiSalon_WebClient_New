@@ -1,6 +1,8 @@
 import { apiFetch } from "./api.js";
 import { preveriJWT } from "./auth.js";
+import { showAlert } from "./alerts.js";
 
+// Preveri JWT ob nalaganju strani
 await preveriJWT();
 
 const seznamEl = document.getElementById("storitveSeznam");
@@ -29,7 +31,7 @@ async function naloziStoritve() {
                     <button class="btn btn-primary btn-sm toggleBtn">+</button>
                 </div>
 
-                <div class="details" style="display:none;">
+                <div class="details">
                     <div class="content mt-3"></div>
 
                     <div class="actions mt-2">
@@ -45,7 +47,7 @@ async function naloziStoritve() {
     seznamEl.appendChild(fragment);
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 }
 
@@ -113,7 +115,7 @@ seznamEl.addEventListener("click", async (e) => {
 
                 contentEl.dataset.loaded = "true";
             } catch (err) {
-                alert(err.message);
+                showAlert(err.message, "danger");
                 return;
             }
         }
@@ -125,7 +127,7 @@ seznamEl.addEventListener("click", async (e) => {
     /* ===== POSODOBI ===== */
     if (e.target.classList.contains("editBtn")) {
         if (!li._storitev) {
-            alert("Najprej odprite podrobnosti storitve.");
+            showAlert("Najprej odprite podrobnosti storitve.", "warning");
             return;
         }
 
@@ -158,7 +160,7 @@ seznamEl.addEventListener("click", async (e) => {
         const cena = li.querySelector(".editCena").value;
 
         if (trajanje < 0 || cena < 0) {
-            alert("Trajanje in cena ne smeta biti negativni.");
+            showAlert("Trajanje in cena ne smeta biti negativni.", "warning");
             return;
         }
 
@@ -172,7 +174,7 @@ seznamEl.addEventListener("click", async (e) => {
                 })
             });
 
-            alert(res.message);
+            showAlert(res.message || "Storitev uspešno posodobljena.", "success");
 
             // osveži lokalne podatke
             li._storitev.Opis = opis;
@@ -195,7 +197,7 @@ seznamEl.addEventListener("click", async (e) => {
             if (actionsEl) actionsEl.style.display = "block";
 
         } catch (err) {
-            alert(err.message);
+            showAlert(err.message, "danger");
         }
     }
 
@@ -209,13 +211,13 @@ seznamEl.addEventListener("click", async (e) => {
                 method: "DELETE"
             });
 
-            alert(res.message || "Storitev izbrisana.");
+            showAlert(res.message || "Storitev uspešno izbrisana.", "success");
 
             // odstranimo element iz DOM
             li.remove();
 
         } catch (err) {
-            alert(err.message);
+            showAlert(err.message, "danger");
         }
     }
 });
@@ -231,7 +233,7 @@ form.addEventListener("submit", async (e) => {
 
     // Osnovna frontend validacija
     if (trajanje < 0 || cena < 0) {
-        alert("Trajanje in cena ne smeta biti negativni.");
+        showAlert("Trajanje in cena ne smeta biti negativni.", "warning");
     return;
     }
 
@@ -248,10 +250,10 @@ form.addEventListener("submit", async (e) => {
             body: JSON.stringify(data)
         });
 
-        alert(result.message || "Storitev uspešno dodana.");
+        showAlert(result.message || "Storitev uspešno dodana.", "success");
         form.reset();
 
     } catch (err) {
-        alert(err.message);
+        showAlert(err.message, "danger");
     }
 });

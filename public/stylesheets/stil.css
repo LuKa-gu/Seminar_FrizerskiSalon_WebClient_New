@@ -16,6 +16,7 @@ body {
   opacity: 0.7;
 }
 
+/* Logotip na vrhu strani */
 .znak {
   display: flex;
   justify-content: center;
@@ -28,6 +29,7 @@ body {
   height: auto;
 }
 
+/* Naslovi z ikono */
 h1, h2, h3 {
   display: flex;
   align-items: center;
@@ -79,6 +81,7 @@ h3.no-icon::before {
   flex-shrink: 0;
 }
 
+/* Stil za forme */
 .card {
   border-radius: 0.75rem;
 }
@@ -99,6 +102,7 @@ h3.no-icon::before {
   color: #6d4731;
 }
 
+/* ===== DASHBOARD STILI ===== */
 #dashboard-links {
   gap: 1rem;
 }
@@ -137,6 +141,8 @@ h3.no-icon::before {
   }
 }
 
+/* ===== STORITVE ===== */
+
 /* Seznam storitev kot “card-like” elementi */
 #storitveSeznam {
   list-style: none;
@@ -158,6 +164,7 @@ h3.no-icon::before {
 
 /* Spodnji del za podrobnosti / edit mode */
 #storitveSeznam .details {
+  display: none;
   margin-top: 0.5rem;
 }
 
@@ -181,14 +188,14 @@ h3.no-icon::before {
   width: 100%;
 }
 
-/* ===== Delovniki ===== */
+/* ===== DELOVNIKI ===== */
 
 #delovnikiSeznam {
   padding: 0;
   margin-top: 1rem;
 }
 
-/* en delovnik = mini card */
+/* En delovnik = mini card */
 .delovnik-item {
   list-style: none;
   background-color: white;
@@ -198,7 +205,7 @@ h3.no-icon::before {
   margin-bottom: 1rem;
 }
 
-/* display mode */
+/* Display mode */
 .delovnik-display {
   display: flex;
   justify-content: space-between;
@@ -210,13 +217,13 @@ h3.no-icon::before {
   line-height: 1.4;
 }
 
-/* gumbi */
+/* Gumbi */
 .delovnik-actions {
   display: flex;
   gap: 0.5rem;
 }
 
-/* edit mode */
+/* Edit mode */
 .delovnik-edit .form-group {
   margin-bottom: 0.75rem;
 }
@@ -229,7 +236,7 @@ h3.no-icon::before {
   margin: 0;
 }
 
-/* en termin = bel box z oranžno obrobo */
+/* En termin = bel box z oranžno obrobo */
 .termin-item {
   background-color: white;
   border: 1px solid var(--primary); /* #fd7e14 */
@@ -238,7 +245,7 @@ h3.no-icon::before {
   margin-bottom: 1rem;
 }
 
-/* zgornja vrstica */
+/* Zgornja vrstica */
 .termin-header {
   display: flex;
   justify-content: space-between;
@@ -255,13 +262,13 @@ h3.no-icon::before {
   opacity: 0.8;
 }
 
-/* skriti detajli */
+/* Skriti detajli */
 .termin-item .details {
   display: none;
   margin-top: 1rem;
 }
 
-/* vsebina podrobnosti */
+/* Vsebina podrobnosti */
 .termin-item .content h4 {
   margin-top: 1rem;
   font-size: 1.1rem;
@@ -271,7 +278,7 @@ h3.no-icon::before {
   padding-left: 1.2rem;
 }
 
-/* akcije */
+/* Akcije */
 .termin-item .actions,
 .inlineActions {
   margin-top: 1rem;
@@ -279,18 +286,17 @@ h3.no-icon::before {
   gap: 0.5rem;
 }
 
-/* status */
+/* Status */
 .statusValue {
   font-weight: bold;
 }
 
-/* select pri urejanju statusa */
+/* Select pri urejanju statusa */
 .editStatus {
   margin-left: 0.5rem;
 }
 
-/* ===== TERMIN DETAILS ===== */
-
+/* Detajli termina */
 .termin-section {
   margin-bottom: 1rem;
 }
@@ -313,24 +319,32 @@ h3.no-icon::before {
   border-radius: 0.25rem;
 }
 
-/* ===== STATUS EDIT ===== */
-
+/* Urejanje statusa */
 .status-section {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-/* select kot "izbor spola" */
+/* Select kot "izbor spola" */
 .editStatus.form-control {
   width: auto;
   min-width: 200px;
   display: inline-block;
 }
 
-/* gumbi Shrani / Prekliči */
+/* Gumbi Shrani / Prekliči */
 .inlineActions {
   margin-top: 0.75rem;
   display: flex;
   gap: 0.5rem;
+}
+
+/* Alerti */
+.alertBar {
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 600px;
+  width: auto;
+  z-index: 1050;
 }
