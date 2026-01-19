@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Administratorski vmesnik</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+    
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-3">
+    <div id="alertContainer"></div>
+</div>
+
+<div class="page-wrapper container d-flex flex-column align-items-center">
+
+    <!-- Naslov -->
+    <h1 class="mb-3">Frizerski salon - administratorski vmesnik</h1>
+    <hr class="w-100 mb-4">
+
+    <!-- Pozdrav -->
+    <h2 class="no-icon mb-4" id="pozdrav">Pozdravljen!</h2>
+
+    <script type="module">
+        import { preveriJWT } from "/javascripts/auth.js";
+
+        async function initDashboard() {
+            const data = await preveriJWT();
+
+            if (data.user && data.user.Uporabnisko_ime) {
+                const pozdravEl = document.getElementById("pozdrav");
+                pozdravEl.textContent = `Pozdravljen, ${data.user.Uporabnisko_ime}!`;
+            }
+        }
+
+        initDashboard();
+    </script>
+
+    <!-- Dashboard blok -->
+    <div id="dashboard-links" class="d-flex flex-wrap justify-content-between w-100">
+
+        <div class="dashboard-block">
+            <h2>Pregled terminov</h2>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/termini'">Preglej</button>
+        </div>
+
+        <div class="dashboard-block">
+            <h2>Rezervacija delovnikov</h2>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/delovniki'">Rezerviraj</button>
+        </div>
+
+        <div class="dashboard-block">
+            <h2>Upravljanje storitev</h2>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='/storitve'">Upravljaj</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Alerti -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+	<meta charset="UTF-8">
+    <title>Upravljanje storitev</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body class="bg-light">
+
+<%- include('partials/meni') %>
+
+<div class="page-wrapper container d-flex flex-column align-items-center">
+
+    <h1 class="mb-4">Rezervacija delovnika</h1>
+
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+
+            <form id="delovnikiForm">
+
+                <div class="form-group">
+                    <label for="dan">Dan</label>
+                    <input type="date" id="dan" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="zacetek">Začetek</label>
+                    <input type="time" id="zacetek" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="konec">Konec</label>
+                    <input type="time" id="konec" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Rezerviraj</button>
+            </form>
+        </div>
+    </div>
+
+    <hr class="w-100 mb-4">
+
+    <h1 class="mb-4">Pregled delovnikov</h1>
+
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+
+            <!-- Seznam delovnikov -->
+            <ul id="delovnikiSeznam" class="list-group w-100"></ul>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/javascripts/delovniki.js"></script>
+<!-- Alerti -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

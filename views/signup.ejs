@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Registracija</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-3">
+    <div id="alertContainer"></div>
+</div>
+
+<div class="page-wrapper container d-flex flex-column align-items-center">
+    
+    <!-- Logo -->
+    <div class="znak mb-4">
+        <img src="/images/frizerskisalon_znak.png" alt="Frizerski salon" class="img-fluid">
+    </div>
+    
+    <!-- Naslov -->
+    <h1 class="mb-4 no-icon">Registracija frizerja</h1>
+    
+    <!-- Signup card -->
+    <div class="card shadow-sm login-card">
+        <div class="card-body">
+    
+            <form id="signupForm">
+    
+                <!-- Spol -->
+                <div class="form-group">
+                    <label for="Spol">Spol</label>
+                    <select id="Spol" class="form-control" required>
+                        <option value="">-- izberi --</option>
+                        <option value="Moški">Moški</option>
+                        <option value="Ženski">Ženski</option>
+                    </select>
+                </div>
+    
+                <!-- Ime -->
+                <div class="form-group">
+                    <label for="Ime">Ime</label>
+                    <input type="text" id="Ime" class="form-control" placeholder="Vnesi ime" required>
+                </div>
+    
+                <!-- Priimek -->
+                <div class="form-group">
+                    <label for="Priimek">Priimek</label>
+                    <input type="text" id="Priimek" class="form-control" placeholder="Vnesi priimek" required>
+                </div>
+    
+                <!-- Naslov -->
+                <div class="form-group">
+                    <label for="Naslov">Naslov</label>
+                    <input type="text" id="Naslov" class="form-control" placeholder="Vnesi naslov" required>
+                </div>
+    
+                <!-- Starost -->
+                <div class="form-group">
+                    <label for="Starost">Starost</label>
+                    <input type="number" id="Starost" class="form-control" placeholder="Vnesi starost" required>
+                </div>
+    
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="Mail">Email</label>
+                    <input type="email" id="Mail" class="form-control" placeholder="Vnesi email" required>
+                </div>
+    
+                <!-- Telefon -->
+                <div class="form-group">
+                    <label for="Telefon">Telefon</label>
+                    <input type="text" id="Telefon" class="form-control" placeholder="Vnesi telefon" required>
+                </div>
+    
+                <!-- Opis -->
+                <div class="form-group">
+                    <label for="Opis">Opis</label>
+                    <textarea id="Opis" class="form-control" rows="3" placeholder="Vnesi opis" required></textarea>
+                </div>
+    
+                <!-- Uporabniško ime -->
+                <div class="form-group">
+                    <label for="Uporabnisko_ime">Uporabniško ime</label>
+                    <input type="text" id="Uporabnisko_ime" class="form-control" placeholder="Vnesi uporabniško ime"
+                        required>
+                </div>
+    
+                <!-- Geslo -->
+                <div class="form-group">
+                    <label for="Geslo">Geslo</label>
+                    <input type="password" id="Geslo" class="form-control" placeholder="Vnesi geslo (min 8 znakov)"
+                        required>
+                </div>
+    
+                <!-- Error message (ostane, samo lepše izgleda) -->
+                <div id="GesloError" class="text-danger mb-3"></div>
+    
+                <!-- Specializacije -->
+                <div class="form-group">
+                    <label for="Specializacije">Specializacije</label>
+                    <textarea id="Specializacije" class="form-control" rows="3"
+                        placeholder="Vnesi specializacije (ločene z vejico)" required></textarea>
+                </div>
+    
+                <button type="submit" class="btn btn-primary btn-block">
+                    Registracija
+                </button>
+    
+            </form>
+    
+        </div>
+    </div>
+    
+</div>
+
+<script type="module" src="/javascripts/signup.js"></script>
+<!-- Alerti -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

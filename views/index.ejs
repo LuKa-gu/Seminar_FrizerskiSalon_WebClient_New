@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Preverjanje prijave</title>
+
+    <!-- Bootswatch United theme -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/united/bootstrap.min.css"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/stil.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-3">
+    <div id="alertContainer"></div>
+</div>
+
+<div class="page-wrapper container d-flex flex-column align-items-center">
+
+    <!-- Logo -->
+    <div class="znak mb-4">
+        <img src="/images/frizerskisalon_znak.png" alt="Frizerski salon" class="img-fluid">
+    </div>
+
+    <!-- Status messages -->
+    <div class="text-center login-card">
+        <p id="checkingMessage" class="lead mb-2">Preverjam prijavo...</p>
+        <p id="statusMessage" class="lead mb-0"></p>
+    </div>
+
+</div>
+
+<script type="module">
+    import { preveriJWT } from "/javascripts/auth.js";
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function init() {
+        // Najprej se stran nariše
+        await new Promise(requestAnimationFrame);
+
+        const data = await preveriJWT(); // vračamo celoten objekt { message, user }
+
+        // Počakamo 1s, da prikažemo "Preverjanje prijave"
+        await sleep(1000);
+
+        const checkingEl = document.getElementById("checkingMessage");
+        const statusEl = document.getElementById("statusMessage");
+
+        if (data) {
+            // Prikažemo sporočilo iz backend-a
+            statusEl.textContent = data.message || "Prijava uspešna.";
+
+            // Po kratkem času preusmerimo na dashboard
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 2000);
+        } else {
+            window.location.href = "/login";
+        }
+    }
+
+    init();
+</script>
+
+<!-- Alerti -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
